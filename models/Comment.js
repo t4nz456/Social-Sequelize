@@ -1,5 +1,16 @@
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../db');
 
-let Comment;
-
+const Comment = sequelize.define('Comment', {
+  body: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+  },
+});
 
 module.exports = Comment;

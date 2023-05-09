@@ -13,11 +13,29 @@ describe('Social Sequelzie Test', () => {
 
     // Write your tests here
     
-    test("replace with your test", function() {
-        expect(true).toBe(true);
-    })
+    test('Models are defined', () => {
+        expect(User).toBeDefined();
+        expect(Profile).toBeDefined();
+        expect(Post).toBeDefined();
+        expect(Comment).toBeDefined();
+        expect(Like).toBeDefined();
+      });
+
+      test('Associations are correct', () => {
+        expect(User.hasOne(Profile)).toBe(true);
+        expect(Profile.belongsTo(User)).toBe(true);
+    
+        expect(User.hasMany(Post)).toBe(true);
+        expect(Post.belongsTo(User)).toBe(true);
+    
+        expect(Post.hasMany(Comment)).toBe(true);
+        expect(Comment.belongsTo(Post)).toBe(true);
+    
+        expect(User.belongsToMany(Post, { through: Like, as: 'LikedPosts' })).toBe(true);
+        expect(Post.belongsToMany(User, { through: Like, as: 'LikedByUsers' })).toBe(true);
+      });
 
 
 
 
-})
+});
